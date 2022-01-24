@@ -1,6 +1,6 @@
 async function main() {
     // let response = await fetch('https://api.twelvedata.com/time_series?symbol=GME,MSFT,DIS,BNTX&interval=1min&apikey=e5284dd93deb41c3ab0a1b684e8a0066')
-    // let responseText = await response.text();
+    // let result = await response.text();
     // console.log(responseText);
     // const { GME, MSFT, DIS, BNTX } = result;
     // const stocks = [GME, MSFT, DIS, BNTX];
@@ -17,6 +17,9 @@ async function main() {
     const highestPriceChartCanvas = document.querySelector('#highest-price-chart');
     const averagePriceChartCanvas = document.querySelector('#average-price-chart');
 
+    // let gmeStockOpen = stocks[0].values.map(value => value.open)
+    // console.log(gmeStockOpen)
+
     stocks.forEach(stock => stock.values.reverse())
     //reversing the values in the stocks array
 
@@ -32,7 +35,7 @@ async function main() {
                 label: stock.meta.symbol,
                 //creating a legend with each of our symbols or tickers
                 data: stock.values.map(value => parseFloat(value.high)),
-                //grabbing the highest values from each day
+                //grabbing the highest values from each day, parseFloat converts the returned string value into a float
                 backgroundColor:  getColor(stock.meta.symbol),
                 //calling the get color function to set a specific color for each symbol or ticker
                 borderColor: getColor(stock.meta.symbol),
