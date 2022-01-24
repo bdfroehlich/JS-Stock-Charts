@@ -39,6 +39,23 @@ async function main() {
             }))
         }
     });
+
+    new Chart(highestPriceChartCanvas.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: stocks.map(stock => stock.meta.symbol),
+            //using map to map over the stocks array of objects to grab each symbol and set it as a label
+            datasets: [{
+                label: 'Highest',
+                //creating a legend with each of our symbols or tickers
+                data: stocks.map(stock => findHighest(stock.values)),
+                //grabbing the highest value from each symbol using the findHighest function
+                backgroundColor:  stocks.map(stock => getColor(stock.meta.symbol)),
+                //calling the get color function to set a specific color for each symbol or ticker
+                borderColor: stocks.map(stock => getColor(stock.meta.symbol)),
+            }]
+        }
+    });
 }
 
 function getColor(stock){
@@ -54,6 +71,16 @@ function getColor(stock){
     if(stock === "BNTX"){
         return 'rgba(166, 43, 158, 0.7)'
     }
+}
+
+function findHighest(values){
+    let highest = 0;
+    values.forEach(value => {
+        if (parseFloat(value.high) > highest) {
+            highest = value.high
+        }
+    } )
+    return highest
 }
 
 main()
