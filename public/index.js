@@ -40,7 +40,7 @@ async function main() {
                 //calling the get color function to set a specific color for each symbol or ticker
                 borderColor: getColor(stock.meta.symbol),
             }))
-        },
+        }
     });
 
     new Chart(highestPriceChartCanvas.getContext('2d'), {
@@ -52,14 +52,6 @@ async function main() {
                 label: 'Highest',
                 //creating a legend with each of our symbols or tickers
                 data: stocks.map(stock => findHighest(stock.values)),
-                //grabbing the highest value from each symbol using the findHighest function
-                backgroundColor:  stocks.map(stock => getColor(stock.meta.symbol)),
-                //calling the get color function to set a specific color for each symbol or ticker
-                borderColor: stocks.map(stock => getColor(stock.meta.symbol)),
-            }, {
-                label: 'Lowest',
-                //creating a legend with each of our symbols or tickers
-                data: stocks.map(stock => findLowest(stock.values)),
                 //grabbing the highest value from each symbol using the findHighest function
                 backgroundColor:  stocks.map(stock => getColor(stock.meta.symbol)),
                 //calling the get color function to set a specific color for each symbol or ticker
@@ -94,14 +86,16 @@ function findHighest(values){
     return highest
 }
 
-function findLowest(values){
-    let lowest = 1000;
-    values.forEach(value => {
-        if (parseFloat(value.low) < lowest) {
-            lowest = value.low
-        }
-    } )
-    return lowest
-}
+
+// function findLowest(values){
+//     let lowest = 1000;
+//     values.forEach(value => {
+//         if (parseFloat(value.low) < lowest) {
+//             lowest = value.low
+//         }
+//     } )
+//     return highest
+// }
+
 
 main()
