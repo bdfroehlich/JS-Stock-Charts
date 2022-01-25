@@ -57,7 +57,7 @@ async function main() {
                 //calling the get color function to set a specific color for each symbol or ticker
                 borderColor: stocks.map(stock => getColor(stock.meta.symbol)),
             }, {
-                label: 'Highest',
+                label: 'Lowest',
                 //creating a legend with each of our symbols or tickers
                 data: stocks.map(stock => findLowest(stock.values)),
                 //grabbing the highest value from each symbol using the findHighest function
